@@ -1,4 +1,5 @@
 <?php
+require 'loader.php';
 class MellowBot
 {
 	public $result, $main, $translate, $speech, $wikipedia;

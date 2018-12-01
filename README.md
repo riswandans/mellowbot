@@ -11,7 +11,6 @@ PHP Library Natural Language Processing (NLP) with Artificial intelligence (AI)
 ```php
 <?php
 require 'app.php';
-require 'loader.php';
 
 $MellowBot = new MellowBot();
 $MellowBot->text('translate english to french Hello World');
@@ -28,7 +27,6 @@ Bonjour le monde
 ```php
 <?php
 require 'app.php';
-require 'loader.php';
 
 $MellowBot = new MellowBot();
 $MellowBot->text('what is google?');
