@@ -14,7 +14,8 @@ require 'app.php';
 require 'loader.php';
 
 $MellowBot = new MellowBot();
-$MellowBot->translate('translate english to french Hello World');
+$MellowBot->text('translate english to french Hello World');
+$MellowBot->response();
 ```
 
 ### Result
