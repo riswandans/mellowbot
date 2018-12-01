@@ -30,6 +30,12 @@ class Main
         return $word;
     }
 
+    public function get_word($word) {
+        $split = explode(" ", $word);
+        $word = str_replace($split[0],"",$word);
+        return $word;
+    }
+
     public function get_text($word) {
         $split = explode(" ", $word);
         $word = str_replace($split[0],"",$word);
