@@ -98,10 +98,10 @@ class MellowBot
 		$this->translate->from = "auto";
 		$this->translate->to = "en";
 		$this->translate->word = $ask;
-		if($this->translate->translate() == "current date") {
+
+		if($this->translate->translate() == "current date" or $ask == "current date") {
 		    $this->result = date("d/m/Y");
 		}
-
 		if($this->translate->translate() == "tomorrow's date" or $ask == "tomorrow date") {
 		    $this->result = $this->main->date_tomorrow('d/m/Y');
 		}
