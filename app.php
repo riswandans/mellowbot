@@ -2,7 +2,7 @@
 require 'loader.php';
 class MellowBot
 {
-	public $result, $main, $translate, $speech, $wikipedia;
+	private $result, $main, $translate, $speech, $wikipedia;
 
 	public function __construct() {
         $this->main = new Main;
@@ -16,7 +16,7 @@ class MellowBot
 		$result = $this->wikipedia($ask);
 		$result = $this->say($ask);
 		$result = $this->math($ask);
-		$result = $this->dates($ask);
+		$result = $this->date($ask);
 		$result = $this->textcase($ask);
 		return $result;
 	}
@@ -78,9 +78,14 @@ class MellowBot
 			$expression = $this->main->get_number($ask);
 		    return eval("echo $expression;");
 		}
+
+		if($this->main->split_text($ask, 0) == "math") {
+			$expression = $this->main->get_number($ask);
+		    return eval("echo $expression;");
+		}
 	}
 
-	public function dates($ask) {
+	public function date($ask) {
 		$this->translate->from = "auto";
 		$this->translate->to = "en";
 		$this->translate->word = $ask;
