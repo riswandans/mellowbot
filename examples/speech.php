@@ -3,4 +3,4 @@ require '../app.php';
 
 $MellowBot = new MellowBot();
 $MellowBot->text('say english Hello World');
-$MellowBot->response();
+$MellowBot->reply();

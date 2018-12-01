@@ -5,11 +5,11 @@ class MellowBot
 	private $result, $main, $translate, $speech, $wikipedia;
 
 	public function __construct() {
-        $this->main = new Main;
-        $this->translate = new Google_Translate();
-        $this->speech = new Speech();
-        $this->wikipedia = new Wikipedia();
-    }
+		$this->main = new Main;
+		$this->translate = new Google_Translate();
+		$this->speech = new Speech();
+		$this->wikipedia = new Wikipedia();
+	}
 
 	public function text($ask) {
 		$result = $this->say($ask);
@@ -22,6 +22,10 @@ class MellowBot
 	}
 
 	public function response() {
+		return $this->result."\n";
+	}
+
+	public function reply() {
 		echo $this->result."\n";
 	}
 

@@ -14,7 +14,7 @@ require 'app.php';
 
 $MellowBot = new MellowBot();
 $MellowBot->text('translate english to french Hello World');
-$MellowBot->response();
+$MellowBot->reply();
 ```
 
 ### Result
@@ -30,7 +30,7 @@ require 'app.php';
 
 $MellowBot = new MellowBot();
 $MellowBot->text('what is google?');
-$MellowBot->response();
+$MellowBot->reply();
 ```
 
 ### Result
