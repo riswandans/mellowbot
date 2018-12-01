@@ -45,7 +45,7 @@ Google LLC is an American multinational technology company that specializes in I
 require 'app.php';
 
 $MellowBot = new MellowBot();
-$MellowBot->text('where is london?');
+$MellowBot->text('who is mark zuckerberg?');
 $MellowBot->json();
 ```
 #### Result
