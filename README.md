@@ -1,5 +1,5 @@
 ### MellowBot
-Simple library for Natural Language Processing
+PHP Library Natural Language Processing (NLP) with Artificial intelligence (AI)
 
 ### Requirement
 * php 5.6 / 7.0 / higher

@@ -43,6 +43,11 @@ class MellowBot
 			$this->wikipedia->search = $this->main->get_text($ask);
 			$this->result = $this->wikipedia->get_information();
 		}
+
+		if($this->main->split_text($ask, 0) == "where" and $this->main->split_text($ask, 1) == "is") {
+			$this->wikipedia->search = $this->main->get_text($ask);
+			$this->result = $this->wikipedia->get_information();
+		}
 	}
 
 	public function say($ask) {
