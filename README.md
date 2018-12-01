@@ -10,12 +10,11 @@ Simple library for Natural Language Processing
 
 ```php
 <?php
-require 'main.php';
+require 'app.php';
 require 'loader.php';
 
 $MellowBot = new MellowBot();
 $MellowBot->translate('translate english to french Hello World');
-?>
 ```
 
 ### Result
