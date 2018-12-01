@@ -1,5 +1,5 @@
-### mellowbot
-Simple library for natural language processing
+### MellowBot
+Simple library for Natural Language Processing
 
 ### Usage API
 
@@ -16,7 +16,7 @@ $translate->to = $translate->country_name($main->split_text($ask, 3)); // french
 $translate->word = $main->get_text_translate($ask); // Hello World
 $main->reply($translate->translate()); // Show result
 $speech->say($main->split_text($ask, 3),$translate->translate()); // Make program say Hello World
-
+?>
 ```
 
 ### Result
