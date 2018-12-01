@@ -12,12 +12,12 @@ class MellowBot
     }
 
 	public function text($ask) {
-		$result = $this->translate($ask);
-		$result = $this->wikipedia($ask);
 		$result = $this->say($ask);
 		$result = $this->math($ask);
 		$result = $this->date($ask);
 		$result = $this->textcase($ask);
+		$result = $this->translate($ask);
+		$result = $this->wikipedia($ask);
 		return $result;
 	}
 
