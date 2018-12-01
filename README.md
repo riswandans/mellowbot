@@ -8,6 +8,24 @@ PHP Library Natural Language Processing (NLP) with Artificial intelligence (AI)
 
 ## Example
 
+### Webhook for Telegram BOT
+
+```php
+<?php
+require 'app.php';
+require 'telegram.php';
+
+$telegram = new TelegramBot();
+$telegram->token = "BOT:TOKEN";
+$telegram->start_webhook();
+
+$MellowBot = new MellowBot();
+$MellowBot->text($telegram->last_message);
+$telegram->message = $MellowBot->response();
+$telegram->send();
+```
+
+
 ### Usage Translate (api based on google translate)
 
 ```php
@@ -22,6 +40,8 @@ $MellowBot->reply();
 ```console
 Bonjour le monde
 ```
+
+
 
 ### Usage Artificial intelligence (api based on wikipedia)
 
@@ -38,6 +58,8 @@ $MellowBot->reply();
 Google LLC is an American multinational technology company that specializes in Internet-related services and products, which include online advertising technologies, search engine, cloud computing, software, and hardware.
 ```
 
+
+
 ### Result to JSON
 
 ```php
@@ -51,22 +73,5 @@ $MellowBot->json();
 #### Result
 ```javascript
 {"status":"200","result":"Mark Elliot Zuckerberg (; born May 14, 1984) is an American technology entrepreneur and philanthropist."}
-```
-
-### Webhook for TelegramBOT
-
-```php
-<?php
-require 'app.php';
-require 'telegram.php';
-
-$telegram = new TelegramBot();
-$telegram->token = "BOT:TOKEN";
-$telegram->start_webhook();
-
-$MellowBot = new MellowBot();
-$MellowBot->text($telegram->last_message);
-$telegram->message = $MellowBot->response();
-$telegram->send();
 ```
 
