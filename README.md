@@ -53,3 +53,21 @@ $MellowBot->json();
 {"status":"200","result":"Mark Elliot Zuckerberg (; born May 14, 1984) is an American technology entrepreneur and philanthropist."}
 ```
 
+### Webhook for TelegramBOT
+
+```php
+<?php
+require 'app.php';
+require 'telegram.php';
+
+$telegram = new TelegramBot();
+$telegram->token = "BOT:TOKEN";
+$webhook = $telegram->start_webhook();
+
+$MellowBot = new MellowBot();
+$MellowBot->text($telegram->last_message);
+$response = $MellowBot->response();
+$telegram->message = $response;
+$telegram->send();
+```
+
