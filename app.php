@@ -1,16 +1,18 @@
 <?php
 class MellowBot
 {
-	public $result, $main, $translate, $speech;
+	public $result, $main, $translate, $speech, $wikipedia;
 
 	public function __construct() {
         $this->main = new Main;
         $this->translate = new Google_Translate();
-        $this->speech = new speech;
+        $this->speech = new Speech();
+        $this->wikipedia = new Wikipedia();
     }
 
 	public function text($ask) {
 		$result = $this->translate($ask);
+		$result = $this->wikipedia($ask);
 		$result = $this->say($ask);
 		$result = $this->math($ask);
 		$result = $this->dates($ask);
@@ -28,6 +30,18 @@ class MellowBot
 			$this->translate->to = $this->translate->country_name($this->main->split_text($ask, 3));
 			$this->translate->word = $this->main->get_text_translate($ask);
 			$this->result = $this->translate->translate();
+		}
+	}
+
+	public function wikipedia($ask){
+		if($this->main->split_text($ask, 0) == "what" and $this->main->split_text($ask, 1) == "is") {
+			$this->wikipedia->search = $this->main->get_text($ask);
+			$this->result = $this->wikipedia->get_information();
+		}
+
+		if($this->main->split_text($ask, 0) == "who" and $this->main->split_text($ask, 1) == "is") {
+			$this->wikipedia->search = $this->main->get_text($ask);
+			$this->result = $this->wikipedia->get_information();
 		}
 	}
 

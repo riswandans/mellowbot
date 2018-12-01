@@ -6,7 +6,7 @@ Simple library for Natural Language Processing
 * php-curl
 * say (for library speech)
 
-### Usage API
+### Usage Google Translate
 
 ```php
 <?php
@@ -21,5 +21,22 @@ $MellowBot->response();
 ### Result
 ```console
 Bonjour le monde
+```
+
+### Usage Artificial intelligence
+
+```php
+<?php
+require 'app.php';
+require 'loader.php';
+
+$MellowBot = new MellowBot();
+$MellowBot->text('what is google?');
+$MellowBot->response();
+```
+
+### Result
+```console
+Google LLC is an American multinational technology company that specializes in Internet-related services and products, which include online advertising technologies, search engine, cloud computing, software, and hardware.
 ```
 
