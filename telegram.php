@@ -1,7 +1,7 @@
 <?php
 class TelegramBot
 {
-	public $token, $chat_id, $message, $response;
+	public $token, $chat_id, $message, $last_message;
 
 	public function send() {
         $url = "https://api.telegram.org/bot".$this->token."/sendMessage?chat_id=".$this->chat_id."&text=".urlencode($this->message);
@@ -13,8 +13,10 @@ class TelegramBot
         curl_close($curl);
     }
 
-    public function webhook() {
+    public function start_webhook() {
         $webhook = file_get_contents("php://input");
-        return json_decode($webhook, true);
+        $webhook = json_decode($webhook, true);
+        $this->last_message = $webhook["message"]["text"];
+        $this->chat_id = $webhook["message"]["chat"]["id"];
     }
 }
