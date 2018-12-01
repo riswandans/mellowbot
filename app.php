@@ -39,7 +39,10 @@ class MellowBot
 	}
 
 	public function math($ask) {
-		if($this->main->split_text($ask, 0) == "count") {
+		$this->translate->from = "auto";
+		$this->translate->to = "en";
+		$this->translate->word = $this->main->split_text($ask, 0);
+		if($this->main->split_text($ask, 0) == "math" or $this->main->split_text($ask, 0) == "result" or $this->translate->translate() == "the results") {
 			$expression = $this->main->get_number($ask);
 		    return eval("echo $expression;");
 		}
