@@ -74,7 +74,7 @@ class MellowBot
 		$this->translate->from = "auto";
 		$this->translate->to = "en";
 		$this->translate->word = $this->main->split_text($ask, 0);
-		if($this->main->split_text($ask, 0) == "math" or $this->main->split_text($ask, 0) == "result" or $this->translate->translate() == "the results") {
+		if($this->translate->translate() == "result" or $this->translate->translate() == "results" or $this->translate->translate() == "the results") {
 			$expression = $this->main->get_number($ask);
 		    return eval("echo $expression;");
 		}
@@ -84,11 +84,11 @@ class MellowBot
 		$this->translate->from = "auto";
 		$this->translate->to = "en";
 		$this->translate->word = $ask;
-		if($this->translate->translate() == "current date" or $this->translate->translate() == "today") {
+		if($this->translate->translate() == "current date") {
 		    $this->result = date("d/m/Y");
 		}
 
-		if($this->translate->translate() == "tomorrow date" or $this->translate->translate() == "tomorrow's date") {
+		if($this->translate->translate() == "tomorrow's date" or $ask == "tomorrow date") {
 		    $this->result = $this->main->date_tomorrow('d/m/Y');
 		}
 	}
