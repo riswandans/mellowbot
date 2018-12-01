@@ -29,6 +29,11 @@ class MellowBot
 		echo $this->result."\n";
 	}
 
+	public function json() {
+		$data = array("status" => "200", "result" => $this->result);
+		echo json_encode($data);
+	}
+
 	public function translate($ask){
 		if($this->main->split_text($ask, 0) == "translate") {
 			$this->translate->from = $this->translate->country_name($this->main->split_text($ask, 1));

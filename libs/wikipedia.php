@@ -14,6 +14,6 @@ class Wikipedia
         $result = curl_exec($curl);
         curl_close($curl);
         $result = json_decode($result);
-        echo $result[2][0];
+        return $result[2][0];
     }
 }
