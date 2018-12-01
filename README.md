@@ -62,12 +62,11 @@ require 'telegram.php';
 
 $telegram = new TelegramBot();
 $telegram->token = "BOT:TOKEN";
-$webhook = $telegram->start_webhook();
+$telegram->start_webhook();
 
 $MellowBot = new MellowBot();
 $MellowBot->text($telegram->last_message);
-$response = $MellowBot->response();
-$telegram->message = $response;
+$telegram->message = $MellowBot->response();
 $telegram->send();
 ```
 
