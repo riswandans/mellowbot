@@ -46,17 +46,20 @@ class MellowBot
 	public function wikipedia($ask){
 		if($this->main->split_text($ask, 0) == "what" and $this->main->split_text($ask, 1) == "is") {
 			$this->wikipedia->search = $this->main->get_text($ask);
-			$this->result = $this->wikipedia->get_information();
+			$this->wikipedia->get_information();
+			$this->result = $this->wikipedia->result."\n".$this->wikipedia->source;
 		}
 
 		if($this->main->split_text($ask, 0) == "who" and $this->main->split_text($ask, 1) == "is") {
 			$this->wikipedia->search = $this->main->get_text($ask);
-			$this->result = $this->wikipedia->get_information();
+			$this->wikipedia->get_information();
+			$this->result = $this->wikipedia->result."\n".$this->wikipedia->source;
 		}
 
 		if($this->main->split_text($ask, 0) == "where" and $this->main->split_text($ask, 1) == "is") {
 			$this->wikipedia->search = $this->main->get_text($ask);
-			$this->result = $this->wikipedia->get_information();
+			$this->wikipedia->get_information();
+			$this->result = $this->wikipedia->result."\n".$this->wikipedia->source;
 		}
 	}
 

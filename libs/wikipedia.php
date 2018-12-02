@@ -1,7 +1,7 @@
 <?php
 class Wikipedia
 {
-    public $search;
+    public $search, $result, $source;
 
     /*
     this function for request to search wikipedia
@@ -15,6 +15,7 @@ class Wikipedia
         $result = curl_exec($curl);
         curl_close($curl);
         $result = json_decode($result);
-        return $result[2][0];
+        $this->result = $result[2][0];
+        $this->source = $result[3];
     }
 }
