@@ -2,13 +2,14 @@
 require 'loader.php';
 class MellowBot
 {
-	private $result, $main, $translate, $speech, $wikipedia;
+	private $result, $main, $translate, $speech, $wikipedia, $blockchain;
 
 	public function __construct() {
 		$this->main = new Main;
 		$this->translate = new Google_Translate();
 		$this->speech = new Speech();
 		$this->wikipedia = new Wikipedia();
+		$this->blockchain = new Blockchain();
 	}
 
 	public function text($ask) {
@@ -18,6 +19,7 @@ class MellowBot
 		$result = $this->textcase($ask);
 		$result = $this->translate($ask);
 		$result = $this->wikipedia($ask);
+		$result = $this->blockchain($ask);
 		return $result;
 	}
 
@@ -35,7 +37,7 @@ class MellowBot
 	}
 
 	public function translate($ask){
-		if($this->main->split_text($ask, 0) == "translate") {
+		if($this->main->split_text(strtolower($ask), 0) == "translate") {
 			$this->translate->from = $this->translate->country_name($this->main->split_text($ask, 1));
 			$this->translate->to = $this->translate->country_name($this->main->split_text($ask, 3));
 			$this->translate->word = $this->main->get_text_translate($ask);
@@ -64,6 +66,7 @@ class MellowBot
 	}
 
 	public function say($ask) {
+		$ask = strtolower($ask);
 		if($this->main->split_text($ask, 0) == "say") {
 			$word = $this->main->get_text($ask);
     		$this->speech->say($this->main->split_text($ask, 1),$word);
@@ -71,6 +74,7 @@ class MellowBot
 	}
 
 	public function textcase($ask) {
+		$ask = strtolower($ask);
 		if($this->main->split_text($ask, 0) == "uppercase") {
 			$word = $this->main->get_word($ask);
     		$this->result = trim(strtoupper($word));
@@ -100,13 +104,23 @@ class MellowBot
 	public function date($ask) {
 		$this->translate->from = "auto";
 		$this->translate->to = "en";
-		$this->translate->word = $ask;
+		$this->translate->word = strtolower($ask);
 
 		if($this->translate->translate() == "current date" or $ask == "current date") {
 		    $this->result = date("d/m/Y");
 		}
 		if($this->translate->translate() == "tomorrow's date" or $ask == "tomorrow date") {
 		    $this->result = $this->main->date_tomorrow('d/m/Y');
+		}
+	}
+
+	public function blockchain($ask){
+		$ask = str_replace("$", "usd", $ask);
+		if(preg_match('/usd/', $this->main->split_text($ask, 0)) and preg_match('/btc/', strtolower($ask))) {
+			$ask = str_replace("usd", "", $ask);
+			$this->blockchain->currency = "USD";
+			$this->blockchain->value = $this->main->split_text($ask, 0);
+			$this->result = $this->blockchain->convert();
 		}
 	}
 }
