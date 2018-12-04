@@ -72,6 +72,6 @@ $MellowBot->json();
 ```
 #### Result
 ```javascript
-{"status":"200","result":"Mark Elliot Zuckerberg (; born May 14, 1984) is an American technology entrepreneur and philanthropist."}
+{"status":"200","question":"who is mark zuckerberg?","reply":"Mark Elliot Zuckerberg (; born May 14, 1984) is an American technology entrepreneur and philanthropist.\n\nhttps:\/\/en.wikipedia.org\/wiki\/Mark_Zuckerberg"}
 ```
 
