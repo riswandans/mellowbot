@@ -74,7 +74,11 @@ class MellowBot
 				$ask = str_replace("?", "", $ask);
 				$this->metaweather->city = trim($this->main->get_text($ask));
 				$weather = $this->metaweather->getWeather();
-				$this->result = "The weather in ".$this->metaweather->cityname." is ".$weather;
+				if($weather == "") {
+					$this->result = "Sorry, weather on this country not found.";
+				}else{
+					$this->result = "The weather in ".$this->metaweather->cityname." is ".$weather;
+				}
 			}
 		}
 	}
