@@ -2,7 +2,7 @@
 require 'loader.php';
 class MellowBot
 {
-	private $customtext, $result, $main, $translate, $speech, $wikipedia, $blockchain;
+	private $customtext, $result, $main, $translate, $speech, $wikipedia, $blockchain, $metaweather;
 
 	public function __construct() {
 		$this->main = new Main;
@@ -10,6 +10,7 @@ class MellowBot
 		$this->speech = new Speech();
 		$this->wikipedia = new Wikipedia();
 		$this->blockchain = new Blockchain();
+		$this->metaweather = new MetaWeather();
 	}
 
 	public function text($ask) {
@@ -21,6 +22,7 @@ class MellowBot
 		$result = $this->translate($ask);
 		$result = $this->wikipedia($ask);
 		$result = $this->blockchain($ask);
+		$result = $this->weather($ask);
 		return $result;
 	}
 
@@ -63,6 +65,17 @@ class MellowBot
 			$this->wikipedia->search = $this->main->get_text($ask);
 			$this->wikipedia->get_information();
 			$this->result = $this->wikipedia->result."\n\n".$this->wikipedia->source;
+		}
+	}
+
+	public function weather($ask){
+		if($this->main->split_text($ask, 0) == "weather") {
+			if(preg_match('/on/', $this->main->split_text($ask, 1)) or preg_match('/is/', $this->main->split_text($ask, 1))) {
+				$ask = str_replace("?", "", $ask);
+				$this->metaweather->city = trim($this->main->get_text($ask));
+				$weather = $this->metaweather->getWeather();
+				$this->result = "The weather in ".$this->metaweather->cityname." is ".$weather;
+			}
 		}
 	}
 
