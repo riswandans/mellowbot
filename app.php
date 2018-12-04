@@ -2,7 +2,7 @@
 require 'loader.php';
 class MellowBot
 {
-	private $result, $main, $translate, $speech, $wikipedia, $blockchain;
+	private $customtext, $result, $main, $translate, $speech, $wikipedia, $blockchain;
 
 	public function __construct() {
 		$this->main = new Main;
@@ -13,6 +13,7 @@ class MellowBot
 	}
 
 	public function text($ask) {
+		$this->customtext = $ask;
 		$result = $this->say($ask);
 		$result = $this->math($ask);
 		$result = $this->date($ask);
@@ -32,7 +33,7 @@ class MellowBot
 	}
 
 	public function json() {
-		$data = array("status" => "200", "result" => $this->result);
+		$data = array("status" => "200", "question" => $this->customtext, "reply" => $this->result);
 		echo json_encode($data);
 	}
 
@@ -90,11 +91,11 @@ class MellowBot
 		$this->translate->from = "auto";
 		$this->translate->to = "en";
 		$this->translate->word = $this->main->split_text($ask, 0);
+		
 		if($this->translate->translate() == "result" or $this->translate->translate() == "results" or $this->translate->translate() == "the results") {
 			$expression = $this->main->get_number($ask);
 		    return eval("echo $expression;");
 		}
-
 		if($this->main->split_text($ask, 0) == "math") {
 			$expression = $this->main->get_number($ask);
 		    return eval("echo $expression;");
@@ -109,7 +110,7 @@ class MellowBot
 		if($this->translate->translate() == "current date" or $ask == "current date") {
 		    $this->result = date("d/m/Y");
 		}
-		if($this->translate->translate() == "tomorrow's date" or $ask == "tomorrow date") {
+		if($this->translate->translate() == "tomorrow's date" or $ask == "tomorrow's date" or $ask == "tomorrow date") {
 		    $this->result = $this->main->date_tomorrow('d/m/Y');
 		}
 	}
@@ -121,6 +122,12 @@ class MellowBot
 			$this->blockchain->currency = "USD";
 			$this->blockchain->value = $this->main->split_text($ask, 0);
 			$this->result = $this->blockchain->convert();
+		}
+	}
+
+	public function customReply($pattern, $reply){
+		if(preg_match("/".strtolower(trim($pattern))."/", strtolower(trim($this->customtext)))) {
+			$this->result = $reply;
 		}
 	}
 }

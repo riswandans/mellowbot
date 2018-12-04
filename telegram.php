@@ -3,7 +3,7 @@ class TelegramBot
 {
 	public $token, $chat_id, $message, $last_message;
 
-	public function send() {
+    public function send() {
         $url = "https://api.telegram.org/bot".$this->token."/sendMessage?chat_id=".$this->chat_id."&text=".urlencode($this->message);
         $curl = curl_init();
         curl_setopt($curl, CURLOPT_URL, $url);
