@@ -87,7 +87,7 @@ class MellowBot
 		$ask = strtolower($ask);
 		if($this->main->split_text($ask, 0) == "say") {
 			$word = $this->main->get_text($ask);
-    		$this->speech->say($this->main->split_text($ask, 1),$word);
+			$this->speech->say($this->main->split_text($ask, 1),$word);
 		}
 	}
 
@@ -95,12 +95,12 @@ class MellowBot
 		$ask = strtolower($ask);
 		if($this->main->split_text($ask, 0) == "uppercase") {
 			$word = $this->main->get_word($ask);
-    		$this->result = trim(strtoupper($word));
+			$this->result = trim(strtoupper($word));
 		}
 
 		if($this->main->split_text($ask, 0) == "lowercase") {
 			$word = $this->main->get_word($ask);
-    		$this->result = trim(strtolower($word));
+			$this->result = trim(strtolower($word));
 		}
 	}
 
@@ -108,12 +108,8 @@ class MellowBot
 		$this->translate->from = "auto";
 		$this->translate->to = "en";
 		$this->translate->word = $this->main->split_text($ask, 0);
-		
-		if($this->translate->translate() == "result" or $this->translate->translate() == "results" or $this->translate->translate() == "the results") {
-			$expression = $this->main->get_number($ask);
-		    return eval("echo $expression;");
-		}
-		if($this->main->split_text($ask, 0) == "math") {
+
+		if($this->main->split_text($ask, 0) == "math" or $this->main->split_text($ask, 0) == "result") {
 			$expression = $this->main->get_number($ask);
 		    return eval("echo $expression;");
 		}
@@ -124,11 +120,11 @@ class MellowBot
 		$this->translate->to = "en";
 		$this->translate->word = strtolower($ask);
 
-		if($this->translate->translate() == "current date" or $ask == "current date") {
-		    $this->result = date("d/m/Y");
+		if($ask == "current date") {
+		    $this->result = date("l, j F Y");
 		}
-		if($this->translate->translate() == "tomorrow's date" or $ask == "tomorrow's date" or $ask == "tomorrow date") {
-		    $this->result = $this->main->date_tomorrow('d/m/Y');
+		if($ask == "tomorrow's date" or $ask == "tomorrow date") {
+		    $this->result = $this->main->date_tomorrow('l, j F Y');
 		}
 	}
 
